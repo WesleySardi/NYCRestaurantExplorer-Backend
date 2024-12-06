@@ -17,23 +17,22 @@ public class Inspections {
     @JoinColumn(name = "restaurant_id", nullable = false)
     @JsonBackReference
     private Restaurants restaurant;
-    private Date inspectionDate;
     private String grade;
-    private String comments;
-    private Timestamp createdAt;
-    private Timestamp updatedAt;
+    private Timestamp inspectionDate;
 
-    public Inspections() {
-    }
+    private String criticalFlag;
+    private Timestamp recordDate;
 
-    public Inspections(Integer id, Restaurants restaurant, Date inspectionDate, String grade, String comments, Timestamp createdAt, Timestamp updatedAt) {
+    public Inspections(Integer id, Restaurants restaurant, String grade, Timestamp inspectionDate, String criticalFlag, Timestamp recordDate) {
         this.id = id;
         this.restaurant = restaurant;
-        this.inspectionDate = inspectionDate;
         this.grade = grade;
-        this.comments = comments;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        this.inspectionDate = inspectionDate;
+        this.criticalFlag = criticalFlag;
+        this.recordDate = recordDate;
+    }
+
+    public Inspections() {
     }
 
     public Integer getId() {
@@ -52,14 +51,6 @@ public class Inspections {
         this.restaurant = restaurant;
     }
 
-    public Date getInspectionDate() {
-        return inspectionDate;
-    }
-
-    public void setInspectionDate(Date inspectionDate) {
-        this.inspectionDate = inspectionDate;
-    }
-
     public String getGrade() {
         return grade;
     }
@@ -68,28 +59,28 @@ public class Inspections {
         this.grade = grade;
     }
 
-    public String getComments() {
-        return comments;
+    public Timestamp getInspectionDate() {
+        return inspectionDate;
     }
 
-    public void setComments(String comments) {
-        this.comments = comments;
+    public void setInspectionDate(Timestamp inspectionDate) {
+        this.inspectionDate = inspectionDate;
     }
 
-    public Timestamp getCreatedAt() {
-        return createdAt;
+    public String getCriticalFlag() {
+        return criticalFlag;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
+    public void setCriticalFlag(String criticalFlag) {
+        this.criticalFlag = criticalFlag;
     }
 
-    public Timestamp getUpdatedAt() {
-        return updatedAt;
+    public Timestamp getRecordDate() {
+        return recordDate;
     }
 
-    public void setUpdatedAt(Timestamp updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setRecordDate(Timestamp recordDate) {
+        this.recordDate = recordDate;
     }
 
     @Override
@@ -97,11 +88,11 @@ public class Inspections {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Inspections that = (Inspections) o;
-        return Objects.equals(getId(), that.getId()) && Objects.equals(getRestaurant(), that.getRestaurant()) && Objects.equals(getInspectionDate(), that.getInspectionDate()) && Objects.equals(getGrade(), that.getGrade()) && Objects.equals(getComments(), that.getComments()) && Objects.equals(getCreatedAt(), that.getCreatedAt()) && Objects.equals(getUpdatedAt(), that.getUpdatedAt());
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getRestaurant(), that.getRestaurant()) && Objects.equals(getGrade(), that.getGrade()) && Objects.equals(getInspectionDate(), that.getInspectionDate()) && Objects.equals(getCriticalFlag(), that.getCriticalFlag()) && Objects.equals(getRecordDate(), that.getRecordDate());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getRestaurant(), getInspectionDate(), getGrade(), getComments(), getCreatedAt(), getUpdatedAt());
+        return Objects.hash(getId(), getRestaurant(), getGrade(), getInspectionDate(), getCriticalFlag(), getRecordDate());
     }
 }

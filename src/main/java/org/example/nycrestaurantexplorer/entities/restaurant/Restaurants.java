@@ -13,45 +13,53 @@ import java.util.Objects;
 public class Restaurants {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer camis;
     private String name;
-    private String cuisineType;
-    private String streetAddress;
     private String borough;
+    private String building;
+    private String street;
     private String zipcode;
-    private String phoneNumber;
-    private String currentGrade;
-    private LocalDate lastInspectionDate;
-    private Timestamp createdAt;
-    private Timestamp updatedAt;
+    private String phone;
+    private Double latitude;
+    private Double longitude;
+    private String communityBoard;
+    private String councilDistrict;
+    private String censusTract;
+    private String bin;
+    private String bbl;
+    private String nta;
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<Inspections> inspections;
 
-    public Restaurants() {
-    }
-
-    public Restaurants(Integer id, String name, String cuisineType, String streetAddress, String borough, String zipcode, String phoneNumber, String currentGrade, LocalDate lastInspectionDate, Timestamp createdAt, Timestamp updatedAt, List<Inspections> inspections) {
-        this.id = id;
+    public Restaurants(Integer camis, String name, String borough, String building, String street, String zipcode, String phone, Double latitude, Double longitude, String communityBoard, String councilDistrict, String censusTract, String bin, String bbl, String nta, List<Inspections> inspections) {
+        this.camis = camis;
         this.name = name;
-        this.cuisineType = cuisineType;
-        this.streetAddress = streetAddress;
         this.borough = borough;
+        this.building = building;
+        this.street = street;
         this.zipcode = zipcode;
-        this.phoneNumber = phoneNumber;
-        this.currentGrade = currentGrade;
-        this.lastInspectionDate = lastInspectionDate;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        this.phone = phone;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.communityBoard = communityBoard;
+        this.councilDistrict = councilDistrict;
+        this.censusTract = censusTract;
+        this.bin = bin;
+        this.bbl = bbl;
+        this.nta = nta;
         this.inspections = inspections;
     }
 
-    public Integer getId() {
-        return id;
+    public Restaurants() {
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public Integer getCamis() {
+        return camis;
+    }
+
+    public void setCamis(Integer camis) {
+        this.camis = camis;
     }
 
     public String getName() {
@@ -62,28 +70,28 @@ public class Restaurants {
         this.name = name;
     }
 
-    public String getCuisineType() {
-        return cuisineType;
-    }
-
-    public void setCuisineType(String cuisineType) {
-        this.cuisineType = cuisineType;
-    }
-
-    public String getStreetAddress() {
-        return streetAddress;
-    }
-
-    public void setStreetAddress(String streetAddress) {
-        this.streetAddress = streetAddress;
-    }
-
     public String getBorough() {
         return borough;
     }
 
     public void setBorough(String borough) {
         this.borough = borough;
+    }
+
+    public String getBuilding() {
+        return building;
+    }
+
+    public void setBuilding(String building) {
+        this.building = building;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
     }
 
     public String getZipcode() {
@@ -94,44 +102,76 @@ public class Restaurants {
         this.zipcode = zipcode;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getCurrentGrade() {
-        return currentGrade;
+    public Double getLatitude() {
+        return latitude;
     }
 
-    public void setCurrentGrade(String currentGrade) {
-        this.currentGrade = currentGrade;
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
     }
 
-    public LocalDate getLastInspectionDate() {
-        return lastInspectionDate;
+    public Double getLongitude() {
+        return longitude;
     }
 
-    public void setLastInspectionDate(LocalDate lastInspectionDate) {
-        this.lastInspectionDate = lastInspectionDate;
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
-    public Timestamp getCreatedAt() {
-        return createdAt;
+    public String getCommunityBoard() {
+        return communityBoard;
     }
 
-    public void setCreatedAt(Timestamp createdAt) {
-        this.createdAt = createdAt;
+    public void setCommunityBoard(String communityBoard) {
+        this.communityBoard = communityBoard;
     }
 
-    public Timestamp getUpdatedAt() {
-        return updatedAt;
+    public String getCouncilDistrict() {
+        return councilDistrict;
     }
 
-    public void setUpdatedAt(Timestamp updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setCouncilDistrict(String councilDistrict) {
+        this.councilDistrict = councilDistrict;
+    }
+
+    public String getCensusTract() {
+        return censusTract;
+    }
+
+    public void setCensusTract(String censusTract) {
+        this.censusTract = censusTract;
+    }
+
+    public String getBin() {
+        return bin;
+    }
+
+    public void setBin(String bin) {
+        this.bin = bin;
+    }
+
+    public String getBbl() {
+        return bbl;
+    }
+
+    public void setBbl(String bbl) {
+        this.bbl = bbl;
+    }
+
+    public String getNta() {
+        return nta;
+    }
+
+    public void setNta(String nta) {
+        this.nta = nta;
     }
 
     public List<Inspections> getInspections() {
@@ -147,12 +187,12 @@ public class Restaurants {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Restaurants that = (Restaurants) o;
-        return Objects.equals(getId(), that.getId()) && Objects.equals(getName(), that.getName()) && Objects.equals(getCuisineType(), that.getCuisineType()) && Objects.equals(getStreetAddress(), that.getStreetAddress()) && Objects.equals(getBorough(), that.getBorough()) && Objects.equals(getZipcode(), that.getZipcode()) && Objects.equals(getPhoneNumber(), that.getPhoneNumber()) && Objects.equals(getCurrentGrade(), that.getCurrentGrade()) && Objects.equals(getLastInspectionDate(), that.getLastInspectionDate()) && Objects.equals(getCreatedAt(), that.getCreatedAt()) && Objects.equals(getUpdatedAt(), that.getUpdatedAt()) && Objects.equals(getInspections(), that.getInspections());
+        return Objects.equals(getCamis(), that.getCamis()) && Objects.equals(getName(), that.getName()) && Objects.equals(getBorough(), that.getBorough()) && Objects.equals(getBuilding(), that.getBuilding()) && Objects.equals(getStreet(), that.getStreet()) && Objects.equals(getZipcode(), that.getZipcode()) && Objects.equals(getPhone(), that.getPhone()) && Objects.equals(getLatitude(), that.getLatitude()) && Objects.equals(getLongitude(), that.getLongitude()) && Objects.equals(getCommunityBoard(), that.getCommunityBoard()) && Objects.equals(getCouncilDistrict(), that.getCouncilDistrict()) && Objects.equals(getCensusTract(), that.getCensusTract()) && Objects.equals(getBin(), that.getBin()) && Objects.equals(getBbl(), that.getBbl()) && Objects.equals(getNta(), that.getNta()) && Objects.equals(getInspections(), that.getInspections());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getCuisineType(), getStreetAddress(), getBorough(), getZipcode(), getPhoneNumber(), getCurrentGrade(), getLastInspectionDate(), getCreatedAt(), getUpdatedAt(), getInspections());
+        return Objects.hash(getCamis(), getName(), getBorough(), getBuilding(), getStreet(), getZipcode(), getPhone(), getLatitude(), getLongitude(), getCommunityBoard(), getCouncilDistrict(), getCensusTract(), getBin(), getBbl(), getNta(), getInspections());
     }
 }
 
