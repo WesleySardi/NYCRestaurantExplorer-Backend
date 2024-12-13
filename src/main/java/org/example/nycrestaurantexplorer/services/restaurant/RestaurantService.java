@@ -91,7 +91,7 @@ public class RestaurantService {
     }
 
     public Restaurants findById(Integer id) {
-        return restaurantRepository.findById(id)
+        return restaurantRepository.findByIdWithInspections(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Restaurant not found with ID: " + id));
     }
 }

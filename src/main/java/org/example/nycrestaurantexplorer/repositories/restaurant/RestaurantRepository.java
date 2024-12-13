@@ -38,5 +38,8 @@ public interface RestaurantRepository extends JpaRepository<Restaurants, Integer
     List<Restaurants> findByNameContaining(String name);
 
     Optional<Restaurants> findById(Integer id);
+
+    @Query("SELECT r FROM Restaurants r LEFT JOIN FETCH r.inspections WHERE r.camis = :id")
+    Optional<Restaurants> findByIdWithInspections(Integer id);
 }
 
