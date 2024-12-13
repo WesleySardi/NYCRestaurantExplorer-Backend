@@ -58,28 +58,33 @@ public class RestaurantService {
     }
 
     public Restaurants updateRestaurant(Integer id, PutRestaurantCommand restaurantCommand) {
-        // Verificar se o restaurante existe
         Restaurants existingRestaurant = restaurantRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Restaurant not found with ID: " + id));
 
-        // Atualizar informações básicas
         existingRestaurant.setName(restaurantCommand.getName());
         existingRestaurant.setBorough(restaurantCommand.getBorough());
         existingRestaurant.setStreet(restaurantCommand.getStreet());
         existingRestaurant.setZipcode(restaurantCommand.getZipcode());
         existingRestaurant.setPhone(restaurantCommand.getPhone());
 
-        // Gerenciar inspeções
         for (PutInspectionCommand inspectionCommand : restaurantCommand.getInspections()) {
-            Inspections inspection = new Inspections();
+            Inspections inspection;
+
+            if (inspectionCommand.getId() != null) {
+                inspection = inspectionsRepository.findById(inspectionCommand.getId())
+                        .orElseThrow(() -> new ResourceNotFoundException("Inspection not found with ID: " + inspectionCommand.getId()));
+            } else {
+                inspection = new Inspections();
+            }
+
             inspection.setInspectionDate(inspectionCommand.getInspectionDate());
             inspection.setGrade(inspectionCommand.getGrade());
             inspection.setCriticalFlag(inspectionCommand.getCriticalFlag());
             inspection.setRestaurant(existingRestaurant);
+
             inspectionsRepository.save(inspection);
         }
 
-        // Salvar alterações
         return restaurantRepository.save(existingRestaurant);
     }
 

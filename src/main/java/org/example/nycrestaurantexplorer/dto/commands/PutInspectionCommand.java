@@ -5,19 +5,29 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class PutInspectionCommand {
+    private Integer id;
     private Timestamp inspectionDate;
-
+    private Timestamp recordDate;
     private String grade;
-
     private String criticalFlag;
 
-    public PutInspectionCommand(Timestamp inspectionDate, String grade, String criticalFlag) {
+    public PutInspectionCommand() {
+    }
+
+    public PutInspectionCommand(Integer id, Timestamp inspectionDate, Timestamp recordDate, String grade, String criticalFlag) {
+        this.id = id;
         this.inspectionDate = inspectionDate;
+        this.recordDate = recordDate;
         this.grade = grade;
         this.criticalFlag = criticalFlag;
     }
 
-    public PutInspectionCommand() {
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Timestamp getInspectionDate() {
@@ -26,6 +36,14 @@ public class PutInspectionCommand {
 
     public void setInspectionDate(Timestamp inspectionDate) {
         this.inspectionDate = inspectionDate;
+    }
+
+    public Timestamp getRecordDate() {
+        return recordDate;
+    }
+
+    public void setRecordDate(Timestamp recordDate) {
+        this.recordDate = recordDate;
     }
 
     public String getGrade() {
@@ -49,11 +67,11 @@ public class PutInspectionCommand {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PutInspectionCommand that = (PutInspectionCommand) o;
-        return Objects.equals(getInspectionDate(), that.getInspectionDate()) && Objects.equals(getGrade(), that.getGrade()) && Objects.equals(getCriticalFlag(), that.getCriticalFlag());
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getInspectionDate(), that.getInspectionDate()) && Objects.equals(getRecordDate(), that.getRecordDate()) && Objects.equals(getGrade(), that.getGrade()) && Objects.equals(getCriticalFlag(), that.getCriticalFlag());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getInspectionDate(), getGrade(), getCriticalFlag());
+        return Objects.hash(getId(), getInspectionDate(), getRecordDate(), getGrade(), getCriticalFlag());
     }
 }
