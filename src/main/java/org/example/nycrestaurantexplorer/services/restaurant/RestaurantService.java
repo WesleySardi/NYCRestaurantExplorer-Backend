@@ -78,6 +78,7 @@ public class RestaurantService {
             }
 
             inspection.setInspectionDate(inspectionCommand.getInspectionDate());
+            inspection.setRecordDate(inspectionCommand.getRecordDate());
             inspection.setGrade(inspectionCommand.getGrade());
             inspection.setCriticalFlag(inspectionCommand.getCriticalFlag());
             inspection.setRestaurant(existingRestaurant);
