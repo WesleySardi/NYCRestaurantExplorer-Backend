@@ -38,6 +38,7 @@ public class RestaurantController {
     public Page<Restaurants> getRestaurantsByFilters(
             @RequestParam(required = false) @Parameter(description = "Tipo de cozinha") String grade,
             @RequestParam(required = false) @Parameter(description = "Bairro onde o restaurante está localizado") String borough,
+            @RequestParam(required = false) @Parameter(description = "Tipo de cozinha do restaurante") String cuisineDescription,
             @RequestParam(defaultValue = "1") @Parameter(description = "Número da página para paginar os resultados") int page,
             @RequestParam(defaultValue = "20") @Parameter(description = "Número de itens por página") int size,
             @RequestParam(defaultValue = "name") @Parameter(description = "Campo para ordenação (name, grade, inspection_date)") String sortBy,
@@ -52,7 +53,7 @@ public class RestaurantController {
         // Cria a configuração de paginação com ordenação
         PageRequest pageRequest = PageRequest.of(page, size, Sort.by(direction, sortBy));
 
-        return restaurantService.getRestaurantsByFilters(grade, borough, pageRequest);
+        return restaurantService.getRestaurantsByFilters(grade, borough, cuisineDescription, pageRequest);
     }
 
 

@@ -20,6 +20,7 @@ public class Restaurants {
     private String street;
     private String zipcode;
     private String phone;
+    private String cuisineDescription;
     private Double latitude;
     private Double longitude;
     private String communityBoard;
@@ -32,7 +33,7 @@ public class Restaurants {
     @JsonManagedReference
     private List<Inspections> inspections;
 
-    public Restaurants(Integer camis, String name, String borough, String building, String street, String zipcode, String phone, Double latitude, Double longitude, String communityBoard, String councilDistrict, String censusTract, String bin, String bbl, String nta, List<Inspections> inspections) {
+    public Restaurants(Integer camis, String name, String borough, String building, String street, String zipcode, String phone, String cuisineDescription, Double latitude, Double longitude, String communityBoard, String councilDistrict, String censusTract, String bin, String bbl, String nta, List<Inspections> inspections) {
         this.camis = camis;
         this.name = name;
         this.borough = borough;
@@ -40,6 +41,7 @@ public class Restaurants {
         this.street = street;
         this.zipcode = zipcode;
         this.phone = phone;
+        this.cuisineDescription = cuisineDescription;
         this.latitude = latitude;
         this.longitude = longitude;
         this.communityBoard = communityBoard;
@@ -108,6 +110,14 @@ public class Restaurants {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getCuisineDescription() {
+        return cuisineDescription;
+    }
+
+    public void setCuisineDescription(String cuisineDescription) {
+        this.cuisineDescription = cuisineDescription;
     }
 
     public Double getLatitude() {
@@ -187,12 +197,12 @@ public class Restaurants {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Restaurants that = (Restaurants) o;
-        return Objects.equals(getCamis(), that.getCamis()) && Objects.equals(getName(), that.getName()) && Objects.equals(getBorough(), that.getBorough()) && Objects.equals(getBuilding(), that.getBuilding()) && Objects.equals(getStreet(), that.getStreet()) && Objects.equals(getZipcode(), that.getZipcode()) && Objects.equals(getPhone(), that.getPhone()) && Objects.equals(getLatitude(), that.getLatitude()) && Objects.equals(getLongitude(), that.getLongitude()) && Objects.equals(getCommunityBoard(), that.getCommunityBoard()) && Objects.equals(getCouncilDistrict(), that.getCouncilDistrict()) && Objects.equals(getCensusTract(), that.getCensusTract()) && Objects.equals(getBin(), that.getBin()) && Objects.equals(getBbl(), that.getBbl()) && Objects.equals(getNta(), that.getNta()) && Objects.equals(getInspections(), that.getInspections());
+        return Objects.equals(getCamis(), that.getCamis()) && Objects.equals(getName(), that.getName()) && Objects.equals(getBorough(), that.getBorough()) && Objects.equals(getBuilding(), that.getBuilding()) && Objects.equals(getStreet(), that.getStreet()) && Objects.equals(getZipcode(), that.getZipcode()) && Objects.equals(getPhone(), that.getPhone()) && Objects.equals(getCuisineDescription(), that.getCuisineDescription()) && Objects.equals(getLatitude(), that.getLatitude()) && Objects.equals(getLongitude(), that.getLongitude()) && Objects.equals(getCommunityBoard(), that.getCommunityBoard()) && Objects.equals(getCouncilDistrict(), that.getCouncilDistrict()) && Objects.equals(getCensusTract(), that.getCensusTract()) && Objects.equals(getBin(), that.getBin()) && Objects.equals(getBbl(), that.getBbl()) && Objects.equals(getNta(), that.getNta()) && Objects.equals(getInspections(), that.getInspections());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getCamis(), getName(), getBorough(), getBuilding(), getStreet(), getZipcode(), getPhone(), getLatitude(), getLongitude(), getCommunityBoard(), getCouncilDistrict(), getCensusTract(), getBin(), getBbl(), getNta(), getInspections());
+        return Objects.hash(getCamis(), getName(), getBorough(), getBuilding(), getStreet(), getZipcode(), getPhone(), getCuisineDescription(), getLatitude(), getLongitude(), getCommunityBoard(), getCouncilDistrict(), getCensusTract(), getBin(), getBbl(), getNta(), getInspections());
     }
 }
 

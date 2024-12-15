@@ -14,19 +14,21 @@ public class PutRestaurantCommand {
     private String zipcode;
 
     private String phone;
+    private String cuisineDescription;
 
     private List<PutInspectionCommand> inspections;
 
-    public PutRestaurantCommand(String name, String borough, String street, String zipcode, String phone, List<PutInspectionCommand> inspections) {
+    public PutRestaurantCommand() {
+    }
+
+    public PutRestaurantCommand(String name, String borough, String street, String zipcode, String phone, String cuisineDescription, List<PutInspectionCommand> inspections) {
         this.name = name;
         this.borough = borough;
         this.street = street;
         this.zipcode = zipcode;
         this.phone = phone;
+        this.cuisineDescription = cuisineDescription;
         this.inspections = inspections;
-    }
-
-    public PutRestaurantCommand() {
     }
 
     public String getName() {
@@ -69,6 +71,14 @@ public class PutRestaurantCommand {
         this.phone = phone;
     }
 
+    public String getCuisineDescription() {
+        return cuisineDescription;
+    }
+
+    public void setCuisineDescription(String cuisineDescription) {
+        this.cuisineDescription = cuisineDescription;
+    }
+
     public List<PutInspectionCommand> getInspections() {
         return inspections;
     }
@@ -82,11 +92,11 @@ public class PutRestaurantCommand {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PutRestaurantCommand that = (PutRestaurantCommand) o;
-        return Objects.equals(getName(), that.getName()) && Objects.equals(getBorough(), that.getBorough()) && Objects.equals(getStreet(), that.getStreet()) && Objects.equals(getZipcode(), that.getZipcode()) && Objects.equals(getPhone(), that.getPhone()) && Objects.equals(getInspections(), that.getInspections());
+        return Objects.equals(getName(), that.getName()) && Objects.equals(getBorough(), that.getBorough()) && Objects.equals(getStreet(), that.getStreet()) && Objects.equals(getZipcode(), that.getZipcode()) && Objects.equals(getPhone(), that.getPhone()) && Objects.equals(getCuisineDescription(), that.getCuisineDescription()) && Objects.equals(getInspections(), that.getInspections());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getBorough(), getStreet(), getZipcode(), getPhone(), getInspections());
+        return Objects.hash(getName(), getBorough(), getStreet(), getZipcode(), getPhone(), getCuisineDescription(), getInspections());
     }
 }

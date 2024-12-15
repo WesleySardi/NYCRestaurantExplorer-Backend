@@ -23,10 +23,12 @@ public class RestaurantService {
     @Autowired
     private InspectionsRepository inspectionsRepository;
 
-    public Page<Restaurants> getRestaurantsByFilters(String grade, String borough, PageRequest pageRequest) {
-        if (grade != null && borough != null) {
-            return restaurantRepository.findByGradeAndBorough(grade, borough, pageRequest);
-        } else if (grade != null) {
+    public Page<Restaurants> getRestaurantsByFilters(String grade, String borough, String cuisineDescription, PageRequest pageRequest) {
+        if (grade != null && borough != null && cuisineDescription != null) {
+            return restaurantRepository.findByGradeAndBoroughAndCuisineDescription(grade, borough, cuisineDescription, pageRequest);
+        } else if (cuisineDescription != null) {
+            return restaurantRepository.findByCuisineDescription(cuisineDescription, pageRequest);
+        }else if (grade != null) {
             return restaurantRepository.findByGrade(grade, pageRequest);
         } else if (borough != null) {
             return restaurantRepository.findByBorough(borough, pageRequest);
@@ -52,9 +54,22 @@ public class RestaurantService {
         restaurant.setStreet(restaurantCreateDTO.getStreet());
         restaurant.setZipcode(restaurantCreateDTO.getZipcode());
         restaurant.setPhone(restaurantCreateDTO.getPhone());
+        restaurant.setCuisineDescription(restaurantCreateDTO.getCuisineDescription());
 
         // Salvar a entidade mapeada no banco de dados
-        return restaurantRepository.save(restaurant);
+        restaurant = restaurantRepository.save(restaurant);
+
+        Inspections inspection = new Inspections();
+
+        inspection.setInspectionDate(restaurantCreateDTO.getLastInspectionDate());
+        inspection.setRecordDate(restaurantCreateDTO.getLastInspectionDate());
+        inspection.setGrade(restaurantCreateDTO.getCurrentGrade());
+        inspection.setCriticalFlag("Undefined Critical Flag");
+        inspection.setRestaurant(restaurant);
+
+        inspectionsRepository.save(inspection);
+
+        return restaurant;
     }
 
     public Restaurants updateRestaurant(Integer id, PutRestaurantCommand restaurantCommand) {
@@ -66,6 +81,7 @@ public class RestaurantService {
         existingRestaurant.setStreet(restaurantCommand.getStreet());
         existingRestaurant.setZipcode(restaurantCommand.getZipcode());
         existingRestaurant.setPhone(restaurantCommand.getPhone());
+        existingRestaurant.setCuisineDescription(restaurantCommand.getCuisineDescription());
 
         for (PutInspectionCommand inspectionCommand : restaurantCommand.getInspections()) {
             Inspections inspection;

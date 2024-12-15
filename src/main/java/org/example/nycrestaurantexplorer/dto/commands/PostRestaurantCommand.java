@@ -1,31 +1,31 @@
 package org.example.nycrestaurantexplorer.dto.commands;
 
-import java.time.LocalDate;
+import java.sql.Timestamp;
+import java.util.Objects;
 
 public class PostRestaurantCommand {
 
     private String name;
-    private String cuisineType;  // Tipo de culinária
+    private String cuisineType;
     private String street;
     private String borough;
     private String zipcode;
     private String phone;
-    private String currentGrade;  // Nota atual
-    private LocalDate lastInspectionDate;  // Data da última inspeção
-
-    // Construtores, getters e setters
+    private String cuisineDescription;
+    private String currentGrade;
+    private Timestamp lastInspectionDate;
 
     public PostRestaurantCommand() {
     }
 
-    public PostRestaurantCommand(String name, String cuisineType, String street, String borough, String zipcode,
-                               String phone, String currentGrade, LocalDate lastInspectionDate) {
+    public PostRestaurantCommand(String name, String cuisineType, String street, String borough, String zipcode, String phone, String cuisineDescription, String currentGrade, Timestamp lastInspectionDate) {
         this.name = name;
         this.cuisineType = cuisineType;
         this.street = street;
         this.borough = borough;
         this.zipcode = zipcode;
         this.phone = phone;
+        this.cuisineDescription = cuisineDescription;
         this.currentGrade = currentGrade;
         this.lastInspectionDate = lastInspectionDate;
     }
@@ -78,6 +78,14 @@ public class PostRestaurantCommand {
         this.phone = phone;
     }
 
+    public String getCuisineDescription() {
+        return cuisineDescription;
+    }
+
+    public void setCuisineDescription(String cuisineDescription) {
+        this.cuisineDescription = cuisineDescription;
+    }
+
     public String getCurrentGrade() {
         return currentGrade;
     }
@@ -86,11 +94,24 @@ public class PostRestaurantCommand {
         this.currentGrade = currentGrade;
     }
 
-    public LocalDate getLastInspectionDate() {
+    public Timestamp getLastInspectionDate() {
         return lastInspectionDate;
     }
 
-    public void setLastInspectionDate(LocalDate lastInspectionDate) {
+    public void setLastInspectionDate(Timestamp lastInspectionDate) {
         this.lastInspectionDate = lastInspectionDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PostRestaurantCommand that = (PostRestaurantCommand) o;
+        return Objects.equals(getName(), that.getName()) && Objects.equals(getCuisineType(), that.getCuisineType()) && Objects.equals(getStreet(), that.getStreet()) && Objects.equals(getBorough(), that.getBorough()) && Objects.equals(getZipcode(), that.getZipcode()) && Objects.equals(getPhone(), that.getPhone()) && Objects.equals(getCuisineDescription(), that.getCuisineDescription()) && Objects.equals(getCurrentGrade(), that.getCurrentGrade()) && Objects.equals(getLastInspectionDate(), that.getLastInspectionDate());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName(), getCuisineType(), getStreet(), getBorough(), getZipcode(), getPhone(), getCuisineDescription(), getCurrentGrade(), getLastInspectionDate());
     }
 }

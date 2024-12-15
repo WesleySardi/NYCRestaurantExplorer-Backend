@@ -15,24 +15,32 @@ import java.util.Optional;
 public interface RestaurantRepository extends JpaRepository<Restaurants, Integer> {
     @Query("SELECT r FROM Restaurants r " +
             "JOIN r.inspections i " +
-            "WHERE (:grade IS NULL OR i.grade = :grade) " +
-            "AND (:borough IS NULL OR r.borough = :borough)")
-    Page<Restaurants> findByGradeAndBorough(
+            "WHERE (:grade IS NULL OR i.grade LIKE %:grade%) " +
+            "AND (:borough IS NULL OR r.borough LIKE %:borough%) " +
+            "AND (:cuisineDescription IS NULL OR r.cuisineDescription LIKE %:cuisineDescription%)")
+    Page<Restaurants> findByGradeAndBoroughAndCuisineDescription(
             @Param("grade") String grade,
             @Param("borough") String borough,
+            @Param("cuisineDescription") String cuisineDescription,
             Pageable pageable);
 
     @Query("SELECT r FROM Restaurants r " +
             "LEFT JOIN r.inspections i " +
-            "WHERE :grade IS NULL OR i.grade = :grade")
+            "WHERE :grade IS NULL OR i.grade LIKE %:grade%")
     Page<Restaurants> findByGrade(
             @Param("grade") String grade,
             Pageable pageable);
 
     @Query("SELECT r FROM Restaurants r " +
-            "WHERE :borough IS NULL OR r.borough = :borough")
+            "WHERE :borough IS NULL OR r.borough LIKE %:borough%")
     Page<Restaurants> findByBorough(
             @Param("borough") String borough,
+            Pageable pageable);
+
+    @Query("SELECT r FROM Restaurants r " +
+            "WHERE :cuisineDescription IS NULL OR r.cuisineDescription LIKE %:cuisineDescription%")
+    Page<Restaurants> findByCuisineDescription(
+            @Param("cuisineDescription") String cuisineDescription,
             Pageable pageable);
 
     List<Restaurants> findByNameContaining(String name);
