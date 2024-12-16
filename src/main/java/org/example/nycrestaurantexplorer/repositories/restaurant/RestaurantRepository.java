@@ -43,7 +43,10 @@ public interface RestaurantRepository extends JpaRepository<Restaurants, Integer
             @Param("cuisineDescription") String cuisineDescription,
             Pageable pageable);
 
-    List<Restaurants> findByNameContaining(String name);
+    @Query("SELECT r FROM Restaurants r WHERE LOWER(r.name) LIKE LOWER(CONCAT('%', :name, '%'))")
+    Page<Restaurants> findByNameContainingIgnoreCase(
+            @Param("name") String name,
+            Pageable pageable);
 
     Optional<Restaurants> findById(Integer id);
 

@@ -37,8 +37,8 @@ public class RestaurantService {
         }
     }
 
-    public List<Restaurants> searchRestaurantsByName(String name) {
-        return restaurantRepository.findByNameContaining(name);
+    public Page<Restaurants> searchRestaurantsByName(String name, PageRequest pageRequest) {
+        return restaurantRepository.findByNameContainingIgnoreCase(name, pageRequest);
     }
 
     // Novo método para buscar todos os restaurantes

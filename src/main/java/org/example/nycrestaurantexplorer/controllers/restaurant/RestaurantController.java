@@ -58,15 +58,29 @@ public class RestaurantController {
 
 
     @Operation(summary = "Buscar restaurantes pelo nome",
-            description = "Busca restaurantes com base em uma correspondência parcial do nome.")
+            description = "Busca restaurantes com base em uma correspondência parcial do nome com suporte a paginação.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Restaurantes encontrados com sucesso"),
             @ApiResponse(responseCode = "400", description = "Parâmetro de nome inválido")
     })
     @GetMapping(value = "/search")
-    public List<Restaurants> searchRestaurantsByName(
-            @RequestParam @Parameter(description = "Nome do restaurante para busca parcial") String name) {
-        return restaurantService.searchRestaurantsByName(name);
+    public Page<Restaurants> searchRestaurantsByName(
+            @RequestParam @Parameter(description = "Nome do restaurante para busca parcial") String name,
+            @RequestParam(defaultValue = "1") @Parameter(description = "Número da página para paginar os resultados") int page,
+            @RequestParam(defaultValue = "20") @Parameter(description = "Número de itens por página") int size,
+            @RequestParam(defaultValue = "name") @Parameter(description = "Campo para ordenação (name, grade, inspection_date)") String sortBy,
+            @RequestParam(defaultValue = "asc") @Parameter(description = "Ordem da ordenação (asc ou desc)") String sortDirection
+    ) {
+        // Ajusta a paginação (page é base 0 no Spring Data)
+        page = page > 0 ? page - 1 : 0;
+
+        // Define a direção da ordenação
+        Sort.Direction direction = "desc".equalsIgnoreCase(sortDirection) ? Sort.Direction.DESC : Sort.Direction.ASC;
+
+        // Cria a configuração de paginação com ordenação
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.by(direction, sortBy));
+
+        return restaurantService.searchRestaurantsByName(name, pageRequest);
     }
 
     @Operation(summary = "Buscar todos os restaurantes",
