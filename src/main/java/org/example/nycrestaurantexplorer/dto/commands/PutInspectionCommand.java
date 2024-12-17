@@ -1,7 +1,6 @@
 package org.example.nycrestaurantexplorer.dto.commands;
 
 import java.sql.Timestamp;
-import java.time.LocalDate;
 import java.util.Objects;
 
 public class PutInspectionCommand {

@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import org.example.nycrestaurantexplorer.entities.restaurant.Restaurants;
 
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.Objects;
 
 @Entity

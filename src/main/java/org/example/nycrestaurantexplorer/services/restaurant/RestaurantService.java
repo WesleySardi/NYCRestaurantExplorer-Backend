@@ -41,13 +41,11 @@ public class RestaurantService {
         return restaurantRepository.findByNameContainingIgnoreCase(name, pageRequest);
     }
 
-    // Novo método para buscar todos os restaurantes
     public List<Restaurants> findAllRestaurants() {
         return restaurantRepository.findAll();
     }
 
     public Restaurants createRestaurant(PostRestaurantCommand restaurantCreateDTO) {
-        // Mapeamento do DTO para a entidade Restaurants
         Restaurants restaurant = new Restaurants();
         restaurant.setName(restaurantCreateDTO.getName());
         restaurant.setBorough(restaurantCreateDTO.getBorough());
@@ -56,7 +54,6 @@ public class RestaurantService {
         restaurant.setPhone(restaurantCreateDTO.getPhone());
         restaurant.setCuisineDescription(restaurantCreateDTO.getCuisineDescription());
 
-        // Salvar a entidade mapeada no banco de dados
         restaurant = restaurantRepository.save(restaurant);
 
         Inspections inspection = new Inspections();
@@ -105,7 +102,6 @@ public class RestaurantService {
         return restaurantRepository.save(existingRestaurant);
     }
 
-    // DELETE - Remove a restaurant
     public void deleteRestaurant(Integer id) {
         Restaurants existingRestaurant = restaurantRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Restaurant not found with ID: " + id));
