@@ -1,5 +1,5 @@
 
-# NYC Restaurant Explorer
+# NYC Restaurant Explorer - Back-end
 
 **NYC Restaurant Explorer** is a backend project designed to provide endpoints for managing restaurants and their inspections in New York City. The application allows functionalities for searching, creating, updating, and deleting restaurant information, as well as providing data related to restaurant inspections, such as the quantity and the date of the last inspection. The API also supports filtered queries to facilitate searching for restaurants based on criteria like cuisine type, inspection grade, and location.
 
