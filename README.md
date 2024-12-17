@@ -179,7 +179,7 @@ The application provides RESTful endpoints for restaurant management. Below is a
 
 ---
 
-### 6. **Delete an Inspection**
+### 8. **Delete an Inspection**
    - **URL:** `/api/inspections/{id}`
    - **Method:** `DELETE`
    - **Description:** Deletes an inspection from the system.
